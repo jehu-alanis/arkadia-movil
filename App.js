@@ -1,21 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import store from './store';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import Menu from './screens/Menu';
+import Payment from './components/CheckOut/Payment';
 
-export default function App() {
+//import TaskScreen from '../front-native/screens/Taskhomescreen';
+import { Button, Icon, Header, Badge } from 'react-native-elements';
+
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <Provider store={store}>
+      <NavigationContainer >
+        <Stack.Navigator>
+         
+        <Stack.Screen name= "Menu" component={Menu}
+         options={{
+          
+          headerShown: false,
+         }}/>
+         <Stack.Screen name= "Payment" component={Payment}
+         options={{
+          
+          headerShown: false,
+         }}/>
+          
+          {/* <Stack.Screen name="HomeScreen" component={HomeScreen}
+            options={({ navigation }) => ({
+              
+              header: Headers,
+              headerShown: true,
+              headerStyle: {
+               backgroundColor: '#222f3e'
+              },
+              headerTitleStyle: { color: '#f0f' },
+              headerTintColor: '#f0f'
+            })}>
+            </Stack.Screen> */}
+
+           
+        
+                   
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
